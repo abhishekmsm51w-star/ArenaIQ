@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FIFA Fan & Arena IQ 2026</title>
+  <meta name="description" content="AI-enabled smart stadium operations and interactive fan companion for the FIFA World Cup 2026.">
+  <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+  <div id="app-shell">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo-icon">IQ</div>
+        <div class="logo-text">
+          <h1>ArenaIQ</h1>
+          <span>World Cup 2026</span>
+        </div>
+      </div>
+
+      <!-- Persona Switcher -->
+      <div class="persona-selector">
+        <button id="btn-persona-fan" class="persona-btn active" data-persona="fan">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+          </svg>
+          Fan Companion
+        </button>
+        <button id="btn-persona-ops" class="persona-btn" data-persona="ops">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+          </svg>
+          Stadium Ops
+        </button>
+      </div>
+
+      <!-- Navigation links (Swapped based on active persona) -->
+      <nav class="nav-menu">
+        <!-- Fan Links -->
+        <div id="fan-nav" class="nav-group">
+          <li class="nav-item">
+            <a class="nav-link active" data-view="fan-chat">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+              </svg>
+              <span id="fan-nav-1">GenAI CupGuide</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-view="fan-transit">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+              </svg>
+              <span id="fan-nav-2">Transit & Shuttle</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-view="fan-eco">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+              </svg>
+              <span id="fan-nav-3">Green Challenges</span>
+            </a>
+          </li>
+        </div>
+
+        <!-- Ops Links -->
+        <div id="ops-nav" class="nav-group hide">
+          <li class="nav-item">
+            <a class="nav-link active" data-view="ops-console">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+              </svg>
+              <span id="ops-nav-1">Incidents (AI Support)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-view="ops-heatmap">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+              <span id="ops-nav-2">Crowd Heatmap</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-view="ops-staff">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+              </svg>
+              <span id="ops-nav-3">Staff Dispatch</span>
+            </a>
+          </li>
+        </div>
+      </nav>
+
+      <!-- Sidebar Footer -->
+      <div class="sidebar-footer">
+        <div class="language-selector">
+          <svg xmlns="http://www.w3.org/2000/svg" style="width: 18px; height: 18px; color: var(--text-secondary);" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 11.37 7.363 16.5 3 18.062" />
+          </svg>
+          <select id="app-language-select">
+            <option value="en">English (EN)</option>
+            <option value="es">Español (ES)</option>
+            <option value="fr">Français (FR)</option>
+            <option value="pt">Português (PT)</option>
+            <option value="ar">العربية (AR)</option>
+          </select>
+        </div>
+
+        <div class="stadium-status-badge">
+          <div class="status-dot"></div>
+          <div class="status-info">
+            <span class="status-title">METLIFE ARENA</span>
+            <span class="status-desc">Live Ingress Operating</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      
+      <!-- Top Bar -->
+      <header class="top-bar">
+        <div class="top-bar-title">
+          <h2 id="top-title-text">FIFA CupGuide & Smart Navigation</h2>
+          <p id="top-title-sub">GenAI-enabled assistance & real-time operations planner</p>
+        </div>
+
+        <div class="top-bar-actions">
+          <div class="match-clock">
+            <svg class="clock-icon" xmlns="http://www.w3.org/2000/svg" style="width: 16px; height: 16px;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span>MATCHDAY 1 - KICKOFF IN 2H 20M</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- Viewports -->
+      
+      <!-- Persona 1: FAN COMPANION VIEWPORT -->
+      <div id="fan-dashboard" class="dashboard-container dashboard-pane active">
+        <div class="grid-three-col">
+          
+          <!-- Column 1: GenAI Chat Assistant -->
+          <section class="glass-card highlight-primary">
+            <div class="card-header">
+              <div class="card-title-group">
+                <div class="card-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 18px; height: 18px;">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="card-title" id="chat-title">AI CupGuide Assistant</h3>
+                  <span class="card-subtitle">Real-time multilingual support</span>
+                </div>
+              </div>
+              <div class="card-actions">
+                <button class="btn" id="btn-open-report" style="background: var(--danger); color: #fff; padding: 6px 10px; font-size: 11px; display: flex; align-items: center; gap: 4px; border-radius: 6px; border: none; cursor: pointer;">
+                  <span>🚨 Report Incident</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Chatbot Box -->
+            <div class="card-content chat-container">
+              <div class="chat-history" id="fan-chat-history">
+                <!-- Messages populated by JS -->
+              </div>
+
+              <!-- Quick prompts to click -->
+              <div class="quick-prompts" id="chat-quick-prompts">
+                <span class="prompt-tag" data-prompt="How do I get to Section 112 from Gate A?">Route Gate A ➔ Sec 112</span>
+                <span class="prompt-tag" data-prompt="Where is the nearest sensory room?">Sensory Rooms ♿</span>
+                <span class="prompt-tag" data-prompt="How can I recycle my commemorative cup?">Earn Green Points 🌱</span>
+                <span class="prompt-tag" data-prompt="What train schedule runs to Manhattan?">Transit to Manhattan 🚉</span>
+              </div>
+
+              <!-- Chat input -->
+              <div class="chat-input-area">
+                <input type="text" id="fan-chat-input" placeholder="Ask CupGuide something...">
+                <button class="chat-send-btn" id="fan-chat-send">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </section>
+
+          <!-- Column 2: Interactive SVG Stadium Map -->
+          <section class="glass-card">
+            <div class="card-header">
+              <div class="card-title-group">
+                <div class="card-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 18px; height: 18px;">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="card-title" id="map-title">Interactive Arena Map</h3>
+                  <span class="card-subtitle" id="map-subtitle">Select Gate or Section nodes to test wayfinding</span>
+                </div>
+              </div>
+              
+              <div class="card-actions">
+                <button class="map-control-btn active" id="btn-map-fan-route" title="Wayfinding Route">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 16px; height: 16px;">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- SVG Map wrapper -->
+            <div class="card-content" style="justify-content: center;">
+              <div class="map-view-wrapper">
+                <div class="map-legend">
+                  <div class="legend-item"><div class="legend-color green"></div><span id="legend-low">Low Congestion</span></div>
+                  <div class="legend-item"><div class="legend-color yellow"></div><span id="legend-mod">Moderate Crowd</span></div>
+                  <div class="legend-item"><div class="legend-color red"></div><span id="legend-heavy">Heavy/Bottleneck</span></div>
+                  <div class="legend-item"><div class="legend-color route"></div><span id="legend-route">GenAI Active Route</span></div>
+                </div>
+
+                <!-- Live SVG Stadium Model -->
+                <svg id="stadium-svg" viewBox="0 0 400 400">
+                  <rect class="svg-bg" width="400" height="400" rx="16" />
+                  
+                  <!-- Stadium Outline -->
+                  <ellipse cx="200" cy="200" rx="160" ry="120" class="stadium-outer-ring" />
+                  <ellipse cx="200" cy="200" rx="130" ry="95" style="fill: none; stroke: rgba(255,255,255,0.04); stroke-width: 2;" />
+                  <!-- Field -->
+                  <rect x="150" y="160" width="100" height="80" rx="4" style="fill: rgba(0, 230, 118, 0.05); stroke: rgba(0, 230, 118, 0.2); stroke-width: 2;" />
+                  <circle cx="200" cy="200" r="15" style="fill: none; stroke: rgba(0, 230, 118, 0.2); stroke-width: 1.5;" />
+                  <line x1="200" y1="160" x2="200" y2="240" style="stroke: rgba(0, 230, 118, 0.2); stroke-width: 1.5;" />
+
+                  <!-- Interactive Seating Sections -->
+                  <path id="sec-101" d="M 160 100 Q 200 90 240 100 L 230 125 Q 200 115 170 125 Z" class="stadium-section heat-low" data-node="Sec 101" />
+                  <path id="sec-104" d="M 245 105 Q 285 125 310 155 L 290 175 Q 270 150 235 130 Z" class="stadium-section heat-low" data-node="Sec 104" />
+                  <path id="sec-108" d="M 315 165 Q 330 200 315 235 L 290 220 Q 300 200 290 180 Z" class="stadium-section heat-low" data-node="Sec 108" />
+                  <path id="sec-112" d="M 310 245 Q 285 275 245 295 L 235 270 Q 270 250 290 225 Z" class="stadium-section heat-low" data-node="Sec 112" />
+                  <path id="sec-116" d="M 240 300 Q 200 310 160 300 L 170 275 Q 200 285 230 275 Z" class="stadium-section heat-low" data-node="Sec 116" />
+                  <path id="sec-120" d="M 155 295 Q 115 275 90 245 L 110 225 Q 130 250 165 270 Z" class="stadium-section heat-low" data-node="Sec 120" />
+                  <path id="sec-124" d="M 85 235 Q 70 200 85 165 L 110 180 Q 100 200 110 220 Z" class="stadium-section heat-low" data-node="Sec 124" />
+                  <path id="sec-128" d="M 90 155 Q 115 125 155 105 L 165 130 Q 130 150 110 175 Z" class="stadium-section heat-low" data-node="Sec 128" />
+
+                  <!-- Outer Gates -->
+                  <circle id="gate-a" cx="75" cy="110" r="10" class="stadium-gate" data-node="Gate A" />
+                  <circle id="gate-b" cx="325" cy="110" r="10" class="stadium-gate" data-node="Gate B" />
+                  <circle id="gate-c" cx="325" cy="290" r="10" class="stadium-gate" data-node="Gate C" />
+                  <circle id="gate-d" cx="75" cy="290" r="10" class="stadium-gate" data-node="Gate D" />
+
+                  <!-- Wayfinding Path (Generated dynamically) -->
+                  <path id="route-line" d="" class="wayfinding-path hide" />
+
+                  <!-- Custom Icon Markers for Concessions & Amenities -->
+                  <!-- Concessions (Shopping Cart Icons) -->
+                  <g class="map-icon-marker" data-node="Concession 1">
+                    <circle cx="165" cy="140" r="7" style="fill: var(--primary); opacity: 0.8;" />
+                    <circle cx="165" cy="140" r="3" style="fill: var(--bg-primary);" />
+                  </g>
+                  <g class="map-icon-marker" data-node="Concession 2">
+                    <circle cx="235" cy="260" r="7" style="fill: var(--primary); opacity: 0.8;" />
+                    <circle cx="235" cy="260" r="3" style="fill: var(--bg-primary);" />
+                  </g>
+                  
+                  <!-- Eco Smart Bins (Leaf/Green Icons) -->
+                  <g class="map-icon-marker" data-node="EcoHub A">
+                    <circle cx="235" cy="140" r="7" style="fill: var(--secondary); opacity: 0.8;" />
+                    <circle cx="235" cy="140" r="3" style="fill: var(--bg-primary);" />
+                  </g>
+                  <g class="map-icon-marker" data-node="EcoHub B">
+                    <circle cx="165" cy="260" r="7" style="fill: var(--secondary); opacity: 0.8;" />
+                    <circle cx="165" cy="260" r="3" style="fill: var(--bg-primary);" />
+                  </g>
+                  
+                  <!-- First Aid (Cross Icons) -->
+                  <g class="map-icon-marker" data-node="First Aid North">
+                    <rect x="195" y="75" width="10" height="10" rx="2" style="fill: var(--danger); opacity: 0.8;" />
+                    <line x1="200" y1="77" x2="200" y2="83" style="stroke: #fff; stroke-width: 1.5;" />
+                    <line x1="197" y1="80" x2="203" y2="80" style="stroke: #fff; stroke-width: 1.5;" />
+                  </g>
+                  <g class="map-icon-marker" data-node="First Aid South">
+                    <rect x="195" y="315" width="10" height="10" rx="2" style="fill: var(--danger); opacity: 0.8;" />
+                    <line x1="200" y1="317" x2="200" y2="323" style="stroke: #fff; stroke-width: 1.5;" />
+                    <line x1="197" y1="320" x2="203" y2="320" style="stroke: #fff; stroke-width: 1.5;" />
+                  </g>
+
+                  <!-- Labels for Gates -->
+                  <text x="75" y="95" class="map-node-label">GATE A</text>
+                  <text x="325" y="95" class="map-node-label">GATE B</text>
+                  <text x="325" y="315" class="map-node-label">GATE C</text>
+                  <text x="75" y="315" class="map-node-label">GATE D</text>
+                </svg>
+              </div>
+            </div>
+          </section>
+
+          <!-- Column 3: Green Footprint & Transit Schedules -->
+          <div style="display: flex; flex-direction: column; gap: 24px; height: 100%;">
+            
+            <!-- Sustainability Card -->
+            <section class="glass-card flex-grow" style="height: 55%;">
+              <div class="card-header">
+                <div class="card-title-group">
+                  <div class="card-icon" style="color: var(--secondary);">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 18px; height: 18px;">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-12.728l.707.707m12.728 12.728l.707.707M12 7a5 5 0 100 10 5 5 0 000-10z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 class="card-title" id="eco-title">Green Fan Challenge</h3>
+                    <span class="card-subtitle" id="eco-subtitle">Log sustainability actions & earn rewards</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card-content green-tracker-box">
+                <!-- Score Display -->
+                <div class="footprint-progress-wrapper">
+                  <div class="footprint-score-header">
+                    <span class="footprint-value" id="eco-points-display">60</span>
+                    <span class="footprint-target" id="eco-target-label">XP TO BADGE LEVEL 2</span>
+                  </div>
+                  <div class="progress-bar-container">
+                    <div class="progress-bar-fill" id="eco-progress-fill" style="width: 60%;"></div>
+                  </div>
+                </div>
+
+                <!-- Green Actions checklist -->
+                <div class="action-checkboxes">
+                  <div class="green-action-card" data-pts="15" id="act-recycle">
+                    <div class="green-action-info">
+                      <svg class="green-action-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 1121.21 6H16" />
+                      </svg>
+                      <span class="green-action-label" id="eco-action-1">Recycled commemorative cup</span>
+                    </div>
+                    <span class="green-action-pts">+15 pts</span>
+                  </div>
+
+                  <div class="green-action-card" data-pts="20" id="act-transit">
+                    <div class="green-action-info">
+                      <svg class="green-action-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                      </svg>
+                      <span class="green-action-label" id="eco-action-2">Used public electric shuttle</span>
+                    </div>
+                    <span class="green-action-pts">+20 pts</span>
+                  </div>
+
+                  <div class="green-action-card" data-pts="10" id="act-ticket">
+                    <div class="green-action-info">
+                      <svg class="green-action-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                      </svg>
+                      <span class="green-action-label" id="eco-action-3">Scanned mobile digital ticket</span>
+                    </div>
+                    <span class="green-action-pts">+10 pts</span>
+                  </div>
+                </div>
+
+                <!-- Eco Badges Showcase -->
+                <div class="badge-gallery">
+                  <div class="eco-badge unlocked" id="badge-1">
+                    <svg class="badge-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                    </svg>
+                    <span class="badge-name" id="badge-name-1">Green Starter</span>
+                  </div>
+                  <div class="eco-badge locked" id="badge-2">
+                    <svg class="badge-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                    <span class="badge-name" id="badge-name-2">Transit Hero</span>
+                  </div>
+                  <div class="eco-badge locked" id="badge-3">
+                    <svg class="badge-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                    </svg>
+                    <span class="badge-name" id="badge-name-3">Eco Elite</span>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- Transit Monitor Card -->
+            <section class="glass-card flex-grow" style="height: 45%;">
+              <div class="card-header">
+                <div class="card-title-group">
+                  <div class="card-icon" style="color: var(--primary);">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 18px; height: 18px;">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 class="card-title" id="transit-title">Live Transit Hub</h3>
+                    <span class="card-subtitle" id="transit-subtitle">Real-time stadium connections</span>
+                  </div>
+                </div>
+              </div>
+              <div class="card-content transit-list" id="transit-list-container">
+                <!-- Transit lines populated dynamically -->
+              </div>
+            </section>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Persona 2: STADIUM OPS VIEWPORT -->
+      <div id="ops-dashboard" class="dashboard-container dashboard-pane">
+        <div class="grid-three-col">
+          
+          <!-- Column 1: Incidents List -->
+          <section class="glass-card">
+            <div class="card-header">
+              <div class="card-title-group">
+                <div class="card-icon" style="color: var(--danger);">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 18px; height: 18px;">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                  </svg>
+                </div>
+                <div>
+                   <h3 class="card-title" id="ops-incident-title">Ops Incident Console</h3>
+                  <span class="card-subtitle" id="incident-sub-count">4 active alerts</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-content">
+              <div class="incident-list" id="ops-incident-list">
+                <!-- Incidents populated by JS -->
+              </div>
+            </div>
+          </section>
+
+          <!-- Column 2: Operations Map (Crowd Density Heatmap) -->
+          <section class="glass-card highlight-primary">
+            <div class="card-header">
+              <div class="card-title-group">
+                <div class="card-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 18px; height: 18px;">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                  </svg>
+                </div>
+                <div>
+                   <h3 class="card-title" id="ops-map-title">Live Crowd Density Overlay</h3>
+                   <span class="card-subtitle" id="ops-map-subtitle">Real-time thermal sensor array mapping</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- SVG Map wrapper shared / duplicated for Ops visualization -->
+            <div class="card-content" style="justify-content: center;">
+              <div class="map-view-wrapper" id="ops-map-wrapper">
+                <div class="map-legend">
+                  <div class="legend-item"><div class="legend-color green"></div><span id="ops-legend-clear">Clear (&lt;30%)</span></div>
+                  <div class="legend-item"><div class="legend-color yellow"></div><span id="ops-legend-crowded">Crowded (60%)</span></div>
+                  <div class="legend-item"><div class="legend-color red"></div><span id="ops-legend-bottleneck">Bottleneck (95%)</span></div>
+                </div>
+                
+                <svg id="ops-stadium-svg" viewBox="0 0 400 400" style="width: 90%; height: 90%; max-height: 500px;">
+                  <!-- Re-rendered SVG stadium inside Ops dashboard with exact interactive node updates -->
+                </svg>
+              </div>
+            </div>
+          </section>
+
+          <!-- Column 3: AI Decision Support & Volunteer Grid -->
+          <div style="display: flex; flex-direction: column; gap: 24px; height: 100%;">
+            
+            <!-- AI Dispatch Support Console -->
+            <section class="glass-card" style="height: 50%;">
+              <div class="card-header">
+                <div class="card-title-group">
+                  <div class="card-icon" style="color: var(--primary);">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 18px; height: 18px;">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 class="card-title" id="ops-ai-title">GenAI Dispatch Advisor</h3>
+                    <span class="card-subtitle" id="ops-ai-subtitle">Automated response generator</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card-content dispatch-console-box" id="ops-dispatch-panel">
+                <!-- AI recommendations populate dynamically on active incident click -->
+                <div class="empty-state">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
+                  </svg>
+                  <p>Select an active incident from the list to analyze with Generative AI support recommendations.</p>
+                </div>
+              </div>
+            </section>
+
+            <!-- Volunteer & Staff Roster Matrix -->
+            <section class="glass-card" style="height: 50%;">
+              <div class="card-header">
+                <div class="card-title-group">
+                  <div class="card-icon" style="color: var(--secondary);">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 18px; height: 18px;">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 class="card-title" id="ops-staff-title">Staff & Volunteers</h3>
+                    <span class="card-subtitle" id="ops-staff-subtitle">Live deployment tracker</span>
+                  </div>
+                </div>
+              </div>
+              <div class="card-content" style="overflow-y: auto;">
+                <div class="volunteer-grid" id="ops-volunteer-grid">
+                  <!-- Volunteers populated by JS -->
+                </div>
+              </div>
+            </section>
+
+          </div>
+
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Report Incident Modal -->
+  <div id="report-modal" class="modal-overlay hide">
+    <div class="modal-content glass-card">
+      <div class="modal-header">
+        <h3 style="color: var(--danger); display: flex; align-items: center; gap: 8px; font-size: 16px;">
+          <svg xmlns="http://www.w3.org/2000/svg" style="width: 20px; height: 20px;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+          </svg>
+          <span id="modal-title">Report Stadium Incident</span>
+        </h3>
+        <button id="modal-close" class="map-control-btn" style="border-radius: 50%; width: 28px; height: 28px; border: none; background: rgba(255,255,255,0.05); color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 18px;">&times;</button>
+      </div>
+      <div class="modal-body" style="display: flex; flex-direction: column; gap: 14px;">
+        <div class="form-group">
+          <label id="label-category">Incident Category</label>
+          <select id="report-category">
+            <option value="Medical">Medical Alert (Heat/Injury)</option>
+            <option value="Security">Crowd Bottleneck / Ingress Stop</option>
+            <option value="Cleanup">Spill / Clean Up Hazard</option>
+            <option value="Recycle">Full Smart Eco Bin</option>
+            <option value="Other">Other Facility Issue</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label id="label-location">Select Location</label>
+          <select id="report-location">
+            <option value="Gate A">Gate A (North)</option>
+            <option value="Gate B">Gate B (East)</option>
+            <option value="Gate C">Gate C (South)</option>
+            <option value="Gate D">Gate D (West)</option>
+            <option value="Sec 101">Section 101</option>
+            <option value="Sec 104">Section 104</option>
+            <option value="Sec 108">Section 108</option>
+            <option value="Sec 112">Section 112</option>
+            <option value="Sec 116">Section 116</option>
+            <option value="Sec 120">Section 120</option>
+            <option value="Sec 124">Section 124</option>
+            <option value="Sec 128">Section 128</option>
+            <option value="Concession 1">Concession Hub 1</option>
+            <option value="Concession 2">Concession Hub 2</option>
+            <option value="EcoHub A">EcoHub A</option>
+            <option value="EcoHub B">EcoHub B</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label id="label-desc">Detailed Description</label>
+          <textarea id="report-description" placeholder="Describe the issue in detail (e.g. wet floor, scanner malfunction)..." rows="3"></textarea>
+        </div>
+        <button class="btn btn-primary" id="btn-submit-report" style="width: 100%; margin-top: 10px; background: var(--danger); color: #fff; padding: 12px; font-size: 13px; border-radius: 8px; border: none; cursor: pointer; font-weight: bold;">Submit Emergency Alert</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script type="module" src="./js/app.js"></script>
+</body>
+</html>
